@@ -1,0 +1,570 @@
+/* ============================================
+   EcommercePhone — 3D iPhone Component Styles
+   ============================================ */
+
+/* Animations */
+@keyframes float3d {
+	0%,
+	100% {
+		transform: rotateY(-25deg) rotateX(5deg) translateY(0px);
+	}
+	50% {
+		transform: rotateY(-25deg) rotateX(5deg) translateY(-14px);
+	}
+}
+
+@keyframes slide-in-up {
+	from {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes cart-bounce {
+	0%,
+	100% {
+		transform: scale(1) translateY(0);
+	}
+	25% {
+		transform: scale(1.06) translateY(-5px);
+	}
+	50% {
+		transform: scale(0.97) translateY(0);
+	}
+	75% {
+		transform: scale(1.03) translateY(-2px);
+	}
+}
+
+@keyframes blink {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.25;
+	}
+}
+
+@keyframes bar-rise {
+	from {
+		transform: scaleY(0);
+	}
+	to {
+		transform: scaleY(1);
+	}
+}
+
+/* ── Scene ── */
+.ep-scene {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	perspective: 1200px;
+	perspective-origin: 50% 50%;
+	width: 100%;
+	height: 100%;
+	background: transparent;
+}
+
+/* ── Phone shell ── */
+.ep-phone {
+	position: relative;
+	width: 300px;
+	height: 620px;
+	transform-style: preserve-3d;
+	transform: rotateY(-25deg) rotateX(5deg);
+	animation: float3d 7s ease-in-out infinite;
+	will-change: transform;
+}
+
+/* ── Frame (body of the phone) ── */
+.ep-frame {
+	position: absolute;
+	inset: 0;
+	border-radius: 46px;
+	background: linear-gradient(
+		160deg,
+		#3a3a42 0%,
+		#222226 35%,
+		#18181c 65%,
+		#111115 100%
+	);
+	box-shadow:
+    /* left face illusion */
+		-18px 0 0 -4px #0d0d10,
+		-18px 0 30px -4px rgba(0, 0, 0, 0.8),
+		/* bottom face illusion */ 0 18px 0 -4px #0e0e12,
+		0 18px 30px -4px rgba(0, 0, 0, 0.6),
+		/* front edge highlight */ inset 0 1px 0 rgba(255, 255, 255, 0.12),
+		inset 1px 0 0 rgba(255, 255, 255, 0.06),
+		/* ambient shadow */ 0 60px 120px rgba(0, 0, 0, 0.7),
+		0 20px 40px rgba(0, 0, 0, 0.5);
+	border: 1.5px solid rgba(255, 255, 255, 0.07);
+}
+
+/* left side face */
+.ep-frame::before {
+	content: '';
+	position: absolute;
+	top: 12px;
+	bottom: 12px;
+	left: -16px;
+	width: 16px;
+	background: linear-gradient(180deg, #0f0f13 0%, #0a0a0e 100%);
+	border-radius: 4px 0 0 4px;
+	transform: rotateY(90deg) translateZ(-8px);
+	box-shadow: inset -2px 0 6px rgba(0, 0, 0, 0.4);
+}
+
+/* bottom face */
+.ep-frame::after {
+	content: '';
+	position: absolute;
+	left: 12px;
+	right: 12px;
+	bottom: -16px;
+	height: 16px;
+	background: linear-gradient(90deg, #0d0d11 0%, #0a0a0e 100%);
+	border-radius: 0 0 4px 4px;
+	transform: rotateX(-90deg) translateZ(-8px);
+}
+
+/* ── Side buttons ── */
+.ep-btn {
+	position: absolute;
+	background: linear-gradient(180deg, #2a2a30, #1a1a1e);
+	border-radius: 2px;
+	box-shadow: -2px 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.ep-btn-mute {
+	left: -5px;
+	top: 110px;
+	width: 4px;
+	height: 30px;
+	border-radius: 2px 0 0 2px;
+}
+.ep-btn-vol1 {
+	left: -5px;
+	top: 155px;
+	width: 4px;
+	height: 50px;
+	border-radius: 2px 0 0 2px;
+}
+.ep-btn-vol2 {
+	left: -5px;
+	top: 218px;
+	width: 4px;
+	height: 50px;
+	border-radius: 2px 0 0 2px;
+}
+.ep-btn-power {
+	right: -5px;
+	top: 170px;
+	width: 4px;
+	height: 65px;
+	border-radius: 0 2px 2px 0;
+	box-shadow: 2px 0 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Screen ── */
+.ep-screen {
+	position: absolute;
+	top: 11px;
+	left: 11px;
+	right: 11px;
+	bottom: 11px;
+	border-radius: 38px;
+	overflow: hidden;
+	background: #06060f;
+	display: flex;
+	flex-direction: column;
+}
+
+.ep-screen-bg {
+	position: absolute;
+	inset: 0;
+	background:
+		radial-gradient(
+			ellipse 90% 45% at 50% 0%,
+			rgba(88, 28, 220, 0.18) 0%,
+			transparent 65%
+		),
+		#06060f;
+	pointer-events: none;
+}
+
+/* ── Dynamic Island ── */
+.ep-island {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 110px;
+	height: 26px;
+	background: #111;
+	border-radius: 0 0 18px 18px;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+}
+
+.ep-island-camera {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #1c1c1e;
+	border: 2px solid #2a2a2e;
+}
+
+.ep-island-sensor {
+	width: 38px;
+	height: 7px;
+	background: #1a1a1e;
+	border-radius: 6px;
+	border: 1px solid #2e2e32;
+}
+
+/* ── Content wrapper ── */
+.ep-content {
+	position: relative;
+	z-index: 1;
+	flex: 1;
+	padding-top: 34px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+/* ── Status bar ── */
+.ep-status {
+	display: flex;
+	justify-content: space-between;
+	padding: 0 16px 6px;
+	font-size: 8px;
+	color: rgba(255, 255, 255, 0.45);
+	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ── Header ── */
+.ep-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 14px 10px;
+}
+
+.ep-header-greeting {
+	color: rgba(255, 255, 255, 0.4);
+	font-size: 9px;
+	margin-bottom: 2px;
+}
+
+.ep-header-title {
+	font-size: 14px;
+	font-weight: 700;
+	background: linear-gradient(90deg, #fff 0%, #a78bfa 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.ep-header-icon {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #7c3aed, #2563eb);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 13px;
+	box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4);
+}
+
+/* ── Analytics Card ── */
+.ep-analytics {
+	margin: 0 14px 4px;
+	background: linear-gradient(
+		135deg,
+		rgba(88, 28, 220, 0.28) 0%,
+		rgba(59, 130, 246, 0.12) 100%
+	);
+	border: 1px solid rgba(139, 92, 246, 0.35);
+	border-radius: 16px;
+	padding: 12px 14px;
+	animation: slide-in-up 0.6s ease-out both;
+}
+
+.ep-analytics-top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.ep-analytics-label {
+	color: rgba(255, 255, 255, 0.45);
+	font-size: 8px;
+	letter-spacing: 0.8px;
+	text-transform: uppercase;
+	margin-bottom: 2px;
+}
+
+.ep-analytics-value {
+	font-size: 18px;
+	font-weight: 700;
+	background: linear-gradient(90deg, #fff, #a78bfa);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.ep-analytics-badge {
+	background: rgba(139, 92, 246, 0.2);
+	border: 1px solid rgba(139, 92, 246, 0.3);
+	border-radius: 10px;
+	padding: 4px 8px;
+	color: #a78bfa;
+	font-size: 9px;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	gap: 3px;
+}
+
+.ep-analytics-badge span {
+	color: #34d399;
+}
+
+.ep-bars {
+	display: flex;
+	align-items: flex-end;
+	gap: 4px;
+	height: 48px;
+}
+
+.ep-bar {
+	flex: 1;
+	border-radius: 3px 3px 0 0;
+	transform-origin: bottom;
+	animation: bar-rise 1s ease-out both;
+}
+
+.ep-tabs {
+	display: flex;
+	gap: 10px;
+	margin-top: 8px;
+}
+
+.ep-tab {
+	font-size: 8px;
+	cursor: pointer;
+}
+
+.ep-tab.active {
+	color: #a78bfa;
+	font-weight: 600;
+	border-bottom: 1px solid #7c3aed;
+	padding-bottom: 1px;
+}
+
+.ep-tab.inactive {
+	color: rgba(255, 255, 255, 0.28);
+}
+
+/* ── Automation Nodes ── */
+.ep-automation {
+	padding: 6px 14px;
+	animation: slide-in-up 0.8s ease-out 0.15s both;
+	opacity: 0;
+}
+
+.ep-automation-label {
+	color: rgba(255, 255, 255, 0.35);
+	font-size: 8px;
+	letter-spacing: 0.8px;
+	text-transform: uppercase;
+	margin-bottom: 6px;
+}
+
+/* ── Cart Widget ── */
+.ep-cart-section {
+	padding: 4px 14px 12px;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	animation: slide-in-up 1s ease-out 0.3s both;
+	opacity: 0;
+}
+
+.ep-total-card {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: linear-gradient(
+		135deg,
+		rgba(88, 28, 220, 0.22) 0%,
+		rgba(139, 92, 246, 0.08) 100%
+	);
+	border: 1px solid rgba(139, 92, 246, 0.28);
+	border-radius: 18px;
+	padding: 14px 16px;
+	position: relative;
+	overflow: hidden;
+}
+
+.ep-total-card::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		45deg,
+		transparent 40%,
+		rgba(139, 92, 246, 0.04) 100%
+	);
+	pointer-events: none;
+}
+
+.ep-total-sublabel {
+	color: rgba(255, 255, 255, 0.38);
+	font-size: 8px;
+	letter-spacing: 0.8px;
+	text-transform: uppercase;
+}
+
+.ep-total-value {
+	font-size: 20px;
+	font-weight: 800;
+	background: linear-gradient(90deg, #e879f9, #60a5fa);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	margin-top: 3px;
+}
+
+.ep-live-dot {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	margin-top: 4px;
+}
+
+.ep-live-dot span {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: #34d399;
+	animation: blink 1.5s ease-in-out infinite;
+	display: inline-block;
+}
+
+.ep-live-dot p {
+	color: #34d399;
+	font-size: 8px;
+	margin: 0;
+}
+
+.ep-cart-icon {
+	animation: cart-bounce 3s ease-in-out infinite;
+	flex-shrink: 0;
+}
+
+/* ── Stat tiles ── */
+.ep-stats {
+	display: flex;
+	gap: 8px;
+}
+
+.ep-stat {
+	flex: 1;
+	background: rgba(255, 255, 255, 0.03);
+	border-radius: 14px;
+	padding: 10px 11px;
+	animation: slide-in-up 1.2s ease-out both;
+	opacity: 0;
+}
+
+.ep-stat:nth-child(1) {
+	border: 1px solid rgba(167, 139, 250, 0.2);
+	animation-delay: 0.1s;
+}
+.ep-stat:nth-child(2) {
+	border: 1px solid rgba(96, 165, 250, 0.2);
+	animation-delay: 0.2s;
+}
+
+.ep-stat-emoji {
+	font-size: 14px;
+}
+.ep-stat-value {
+	font-size: 15px;
+	font-weight: 700;
+	margin-top: 4px;
+}
+.ep-stat-label {
+	color: rgba(255, 255, 255, 0.32);
+	font-size: 8px;
+	margin-top: 2px;
+}
+.ep-stat:nth-child(1) .ep-stat-value {
+	color: #a78bfa;
+}
+.ep-stat:nth-child(2) .ep-stat-value {
+	color: #60a5fa;
+}
+
+/* ── Orders list ── */
+.ep-orders {
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid rgba(139, 92, 246, 0.13);
+	border-radius: 14px;
+	padding: 10px 12px;
+	animation: slide-in-up 1.4s ease-out 0.1s both;
+	opacity: 0;
+}
+
+.ep-orders-label {
+	color: rgba(255, 255, 255, 0.35);
+	font-size: 8px;
+	letter-spacing: 0.8px;
+	text-transform: uppercase;
+	margin-bottom: 7px;
+}
+
+.ep-order-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px 0;
+}
+
+.ep-order-row + .ep-order-row {
+	border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.ep-order-name {
+	color: rgba(255, 255, 255, 0.68);
+	font-size: 8.5px;
+}
+.ep-order-price {
+	color: #a78bfa;
+	font-size: 8.5px;
+	font-weight: 600;
+}
+.ep-order-status {
+	font-size: 9px;
+	margin-left: 5px;
+}
+
+/* ── Blink util ── */
+.blink {
+	animation: blink 1.5s ease-in-out infinite;
+}

@@ -1,0 +1,129 @@
+/* ─────────────────────────────────────────
+   ProductCard.module.css  —  mobile-first
+───────────────────────────────────────── */
+
+.card {
+	display: block;
+}
+
+/* ─── Image wrapper ─── */
+.imageWrapper {
+	position: relative;
+	overflow: hidden;
+	background: #1a1a2e;
+	aspect-ratio: 1;
+}
+
+.image {
+	width: 100%;
+	height: 100%;
+	object-fit: contain; /* rasm proporsiyasini saqlaydi */
+	display: block;
+	padding: 5px 3px 3px;
+	z-index: 123;
+}
+
+/* ─── Badges ─── */
+.badges {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+}
+
+.badgeDiscount {
+	background: rgba(239, 68, 68, 0.9);
+	color: white;
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+}
+
+.badgeFeatured {
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+}
+
+/* ─── Out of stock overlay ─── */
+.outOfStockOverlay {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.outOfStockLabel {
+	color: #8890a8;
+	font-weight: 600;
+	font-size: 13px;
+}
+
+/* ─── Category ─── */
+.category {
+	display: block;
+	margin-bottom: 8px;
+	font-size: 11px;
+	color: var(--accent-2);
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+/* ─── Name ─── */
+.name {
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--text-primary);
+	margin-bottom: 10px;
+	line-height: 1.4;
+	/* 2-line clamp */
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+/* ─── Price row ─── */
+.priceRow {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.price {
+	font-size: 18px;
+	font-weight: 700;
+	color: var(--text-primary);
+	font-family: Syne, sans-serif;
+}
+
+.oldPrice {
+	font-size: 13px;
+	color: var(--text-muted);
+	text-decoration: line-through;
+}
+
+/* ─── Low stock ─── */
+.lowStock {
+	margin-top: 8px;
+}
+
+.lowStockBadge {
+	font-size: 10px;
+}
+
+/* ═════════════════════════════════════════
+   sm — 480px+
+═════════════════════════════════════════ */
+@media (min-width: 480px) {
+	.badges {
+		top: 12px;
+		left: 12px;
+	}
+}

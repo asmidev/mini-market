@@ -1,0 +1,166 @@
+/* ─────────────────────────────────────────
+   Navbar.module.css  —  mobile-first
+   Breakpoint: sm ≥ 640px
+───────────────────────────────────────── */
+
+/* ─── Nav bar ─── */
+.nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	height: 70px;
+	padding: 0 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: transparent;
+	border-bottom: 1px solid transparent;
+	transition:
+		background 0.3s ease,
+		backdrop-filter 0.3s ease,
+		border-color 0.3s ease;
+}
+
+.navScrolled {
+	background: rgba(8, 8, 16, 0.92);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border-bottom-color: rgba(99, 102, 241, 0.1);
+}
+
+/* ─── Brand ─── */
+.brandLink {
+	text-decoration: none;
+	flex-shrink: 0;
+}
+
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.brandIcon {
+	width: 36px;
+	height: 36px;
+	border-radius: 10px;
+	background: linear-gradient(135deg, #6366f1, #a78bfa);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+	box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+	flex-shrink: 0;
+}
+
+.brandName {
+	font-family:
+		'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans';
+	font-weight: 800;
+	font-size: 20px;
+	color: #f0f0ff;
+	letter-spacing: -1.1px;
+}
+
+/* ─── Desktop nav — hidden on mobile ─── */
+.desktopNav {
+	display: none;
+}
+
+.navLinkWrapper {
+	text-decoration: none;
+}
+
+.navLink {
+	padding: 8px 16px;
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #8890a8;
+	background: transparent;
+	transition:
+		color 0.2s,
+		background 0.2s;
+	cursor: pointer;
+}
+
+.navLinkActive {
+	color: #a78bfa;
+	background: rgba(99, 102, 241, 0.1);
+}
+
+.adminBtn {
+	padding: 9px 20px !important;
+	font-size: 13px !important;
+	text-decoration: none;
+}
+
+/* ─── Hamburger — visible on mobile ─── */
+.hamburger {
+	display: flex;
+	font-size: 20px;
+	padding: 8px;
+	border-radius: 8px;
+	line-height: 1;
+}
+
+/* ─── Mobile menu ─── */
+.mobileMenu {
+	position: absolute;
+	top: 70px;
+	left: 0;
+	right: 0;
+	background: rgba(8, 8, 16, 0.98);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.mobileLink {
+	text-decoration: none;
+	padding: 12px 16px;
+	border-radius: 10px;
+	color: #e2e8f0;
+	font-size: 16px;
+	background: rgba(255, 255, 255, 0.03);
+	transition:
+		background 0.2s,
+		color 0.2s;
+}
+
+.mobileLinkActive {
+	color: #a78bfa;
+	background: rgba(99, 102, 241, 0.1);
+}
+
+.mobileAdminBtn {
+	text-decoration: none;
+	text-align: center;
+	justify-content: center;
+	margin-top: 6px;
+}
+
+/* ═════════════════════════════════════════
+   sm — 640px+  (switch to desktop layout)
+═════════════════════════════════════════ */
+@media (min-width: 640px) {
+	.nav {
+		padding: 0 24px;
+	}
+
+	.desktopNav {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.hamburger {
+		display: none;
+	}
+}
